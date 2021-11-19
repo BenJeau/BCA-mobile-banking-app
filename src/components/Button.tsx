@@ -30,13 +30,14 @@ const Button: React.FC<ButtonProps> = ({
               : type === 'secondary'
               ? colors.text
               : colors.background,
-          height: 50,
+          height: type === 'link' ? undefined : 50,
           borderRadius: 10,
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
           opacity: pressed && type === 'link' ? 0.5 : 1,
           flexDirection: 'row',
+          elevation: type !== 'link' ? 5 : 0,
         },
         style,
       ]}

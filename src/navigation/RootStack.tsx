@@ -1,12 +1,12 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Chatbot, Login } from '../screens';
 import HomeBottomTabs from './HomeBottomTabs';
 import { useTheme } from '../hooks';
-import { Icon } from '../components';
-import { Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { IconButton } from '../components';
+import AuthenticatedBottomTabs from './AuthenticatedBottomTabs';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,29 +17,33 @@ const RootStack: React.FC = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        // headerTransparent: true,
         headerTitleStyle: { fontFamily: 'Poppins-Bold' },
         headerStyle: {
-          backgroundColor: theme.colors.primary,
+          backgroundColor: `${theme.colors.background}90`,
         },
-        headerTintColor: theme.colors.background,
         headerLeft: ({ tintColor }) => (
-          <Pressable
+          <IconButton
+            color={tintColor}
+            name="arrow-left-circle-fill"
+            size={25}
+            style={{ marginRight: 10, marginBottom: 5 }}
             onPress={() => navigation.goBack()}
-            style={({ pressed }) => ({
-              marginBottom: 5,
-              marginRight: 10,
-              borderRadius: 25,
-              opacity: pressed ? 0.5 : 1,
-              backgroundColor: pressed ? tintColor : '',
-            })}>
-            <Icon name="arrow-left-circle-fill" color={tintColor} size={30} />
-          </Pressable>
+          />
         ),
+        headerShadowVisible: false,
+        headerTransparent: true,
+        contentStyle: {
+          backgroundColor: theme.colors.background
+        }
       }}>
       <Stack.Screen
         name="HomeBottomTabs"
         component={HomeBottomTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AuthenticatedBottomTabs"
+        component={AuthenticatedBottomTabs}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Login" component={Login} />

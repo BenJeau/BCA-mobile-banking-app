@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Image, StatusBar } from 'react-native';
+import { View } from 'react-native';
 
-import { Button, Text, Title } from '../components';
+import { Button, InfoImage } from '../components';
 import { useChangeNavigationBarColor, useTheme } from '../hooks';
 
 const Home: React.FC = () => {
@@ -12,49 +12,45 @@ const Home: React.FC = () => {
   useChangeNavigationBarColor(theme.colors.text, theme.dark);
 
   return (
-    <>
-      <StatusBar backgroundColor={theme.colors.background} animated />
+    <View
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        padding: 20,
+        paddingTop: 0,
+      }}>
+      <InfoImage
+        source={
+          theme.dark
+            ? require('../assets/images/piggy-bank.png')
+            : require('../assets/images/light/piggy-bank.png')
+        }
+        title="Welcome to BCA Mobile"
+        description="Please login to manage your bank account(s) and monitor its activities"
+      />
       <View
         style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          padding: 20,
-          paddingTop: 0,
+          width: '100%',
+          marginTop: 40,
         }}>
-        <Image
-          source={require('../assets/images/piggy-bank.png')}
-          style={{ width: '100%', height: 300 }}
-          resizeMode="contain"
+        <Button
+          icon="shield-keyhole-fill"
+          label="Sign In"
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
         />
-        <View style={{ marginBottom: 40, alignItems: 'center' }}>
-          <Title style={{ textAlign: 'center' }}>Welcome to BCA Mobile</Title>
-          <Text style={{ textAlign: 'center' }}>
-            Please login to manage your bank account(s) and monitor its
-            activities
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '100%',
-          }}>
-          <Button
-            icon="shield-keyhole-fill"
-            label="Sign In"
-            onPress={() => {
-              navigation.navigate('Login');
-            }}
-          />
-          <Button
-            label="Contact Us"
-            type="link"
-            onPress={() => {
-              navigation.navigate('Support');
-            }}
-          />
-        </View>
+        <Button
+          label="Contact Us"
+          type="link"
+          style={{ marginTop: 15 }}
+          onPress={() => {
+            navigation.navigate('Support');
+          }}
+        />
       </View>
-    </>
+    </View>
   );
 };
 

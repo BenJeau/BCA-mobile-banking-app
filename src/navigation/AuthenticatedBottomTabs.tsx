@@ -1,15 +1,17 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useNavigation } from '@react-navigation/native';
 
-import { Settings, Home, Support } from '../screens';
-import { BottomTabsIcon } from '../components';
+import { Overview, Transfers } from '../screens';
+import { BottomTabsIcon, IconButton } from '../components';
 import { useTheme } from '../hooks';
 
 const Tab = createBottomTabNavigator();
 
-const HomeBottomTabs: React.FC = () => {
+const AuthenticatedBottomTabs: React.FC = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
 
   return (
     <Tab.Navigator
@@ -28,39 +30,40 @@ const HomeBottomTabs: React.FC = () => {
         headerBackground: () => (
           <View
             style={{
-              backgroundColor: `${theme.colors.background}90`,
+              backgroundColor: theme.colors.background,
+              opacity: 0.7,
               height: 50,
             }}
           />
         ),
+        headerRight: () => (
+          <IconButton
+            color={theme.colors.text}
+            name="logout-circle-line"
+            size={20}
+            onPress={() => navigation.navigate('HomeBottomTabs')}
+            style={{ marginRight: 15 }}
+          />
+        ),
       }}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Overview"
+        component={Overview}
         options={{
-          tabBarIcon: props => (
-            <BottomTabsIcon name="home-smile-2" {...props} />
-          ),
+          tabBarIcon: props => <BottomTabsIcon name="dashboard-3" {...props} />,
         }}
       />
       <Tab.Screen
-        name="Support"
-        component={Support}
+        name="Transfers"
+        component={Transfers}
         options={{
           tabBarIcon: props => (
-            <BottomTabsIcon name="chat-smile-3" {...props} />
+            <BottomTabsIcon name="arrow-left-right" {...props} />
           ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          tabBarIcon: props => <BottomTabsIcon name="settings-3" {...props} />,
         }}
       />
     </Tab.Navigator>
   );
 };
 
-export default HomeBottomTabs;
+export default AuthenticatedBottomTabs;

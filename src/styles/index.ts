@@ -28,7 +28,7 @@ export const DarkTheme: Theme = {
 export const LightTheme: Theme = {
   dark: false,
   colors: {
-    primary: colors.yellow.light,
+    primary: colors.yellow.dark,
     background: colors.green.light,
     card: colors.green.default,
     text: colors.green.dark,
