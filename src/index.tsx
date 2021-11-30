@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RootStack } from './navigation';
+import { RootStack } from './navigation/index';
 import Provider from './utils/Provider';
 
 const App: React.FC = () => (

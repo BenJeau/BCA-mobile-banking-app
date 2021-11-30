@@ -1,39 +1,24 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Settings, Home, Support } from '../screens';
 import { BottomTabsIcon } from '../components';
 import { useTheme } from '../hooks';
+import { bottomTabNavigationOptions } from '.';
 
-const Tab = createBottomTabNavigator();
+export type HomeBottomTabsParamList = {
+  Home: undefined;
+  Support: undefined;
+  Settings: undefined;
+};
+
+const Tab = createBottomTabNavigator<HomeBottomTabsParamList>();
 
 const HomeBottomTabs: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerTransparent: true,
-        headerTitleStyle: { fontFamily: 'Poppins-Bold' },
-        tabBarLabelStyle: { fontFamily: 'Poppins-Bold' },
-        tabBarInactiveTintColor: `${theme.colors.background}90`,
-        tabBarActiveTintColor: theme.colors.background,
-        tabBarStyle: {
-          borderTopStartRadius: 10,
-          borderTopEndRadius: 10,
-          borderTopWidth: 0,
-          backgroundColor: theme.colors.text,
-        },
-        headerBackground: () => (
-          <View
-            style={{
-              backgroundColor: `${theme.colors.background}90`,
-              height: 50,
-            }}
-          />
-        ),
-      }}>
+    <Tab.Navigator screenOptions={bottomTabNavigationOptions(theme)}>
       <Tab.Screen
         name="Home"
         component={Home}

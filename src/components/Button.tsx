@@ -1,5 +1,6 @@
 import React from 'react';
-import { Pressable, ViewStyle } from 'react-native';
+import { Pressable, TextStyle, ViewStyle } from 'react-native';
+
 import { Icon, Text } from '.';
 import { useTheme } from '../hooks';
 
@@ -9,6 +10,7 @@ interface ButtonProps {
   icon?: string;
   onPress?: () => void;
   style?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,8 +19,9 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   onPress,
   style,
+  textStyle,
 }) => {
-  const { colors } = useTheme();
+  const theme = useTheme();
 
   return (
     <Pressable
@@ -26,10 +29,10 @@ const Button: React.FC<ButtonProps> = ({
         {
           backgroundColor:
             type === 'primary'
-              ? colors.primary
+              ? theme.colors.primary
               : type === 'secondary'
-              ? colors.text
-              : colors.background,
+              ? theme.colors.text
+              : theme.colors.background,
           height: type === 'link' ? undefined : 50,
           borderRadius: 10,
           width: '100%',
@@ -45,30 +48,33 @@ const Button: React.FC<ButtonProps> = ({
       disabled={!onPress}
       android_ripple={{
         borderless: false,
-        color: colors.background,
+        color: theme.colors.background,
       }}>
       {icon && (
         <Icon
           name={icon}
           size={20}
           style={{ marginRight: 10 }}
-          color={type === 'link' ? colors.text : colors.background}
+          color={type === 'link' ? theme.colors.text : theme.colors.background}
         />
       )}
       <Text
-        style={{
-          color:
-            type === 'primary'
-              ? colors.background
-              : type === 'secondary'
-              ? colors.background
-              : colors.text,
-          fontFamily: type === 'link' ? 'Poppins-Medium' : 'Poppins-Bold',
-          fontSize: 15,
-          textDecorationLine: type === 'link' ? 'underline' : 'none',
-          textDecorationColor: colors.text,
-          textDecorationStyle: 'solid',
-        }}>
+        style={[
+          {
+            color:
+              type === 'primary'
+                ? theme.colors.background
+                : type === 'secondary'
+                ? theme.colors.background
+                : theme.colors.text,
+            fontFamily: type === 'link' ? 'Poppins-Medium' : 'Poppins-Bold',
+            fontSize: 15,
+            textDecorationLine: type === 'link' ? 'underline' : 'none',
+            textDecorationColor: theme.colors.text,
+            textDecorationStyle: 'solid',
+          },
+          textStyle,
+        ]}>
         {label}
       </Text>
     </Pressable>

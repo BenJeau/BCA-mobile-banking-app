@@ -5,3 +5,8 @@ export { default as Support } from './Support';
 export { default as Chatbot } from './Chatbot';
 export { default as Transfers } from './Transfers';
 export { default as Overview } from './Overview';
+export { default as AccountDetails } from './AccountDetails';
+export { default as Deposit } from './Deposit';
+export { default as MobileDeposit } from './MobileDeposit';
+export { default as AccountSelection } from './AccountSelection';
+export { default as TransferAccount } from './TransferAccount';

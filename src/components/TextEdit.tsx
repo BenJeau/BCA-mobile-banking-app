@@ -15,8 +15,8 @@ import { useCombinedRefs } from '../hooks';
 import { Icon } from '.';
 
 interface TextEditProp {
-  label: string;
-  icon: string;
+  label?: string;
+  icon?: string;
   placeholder?: string;
   textInputProps?: TextInputProps;
   style?: ViewStyle;
@@ -49,18 +49,22 @@ const TextEdit = forwardRef(
         style={[styles.container, style]}
         onPress={() => innerRef.current?.focus()}>
         <View>
-          <Animated.Text
-            style={{
-              ...styles.label,
-              color: theme.colors.text,
-            }}>
-            {label}
-          </Animated.Text>
+          {label && (
+            <Animated.Text
+              style={{
+                ...styles.label,
+                color: theme.colors.text,
+              }}>
+              {label}
+            </Animated.Text>
+          )}
 
           <View style={styles.secondLine}>
-            <View style={styles.textInputIcon}>
-              <Icon name={icon} size={25} color={theme.colors.text} />
-            </View>
+            {icon && (
+              <View style={styles.textInputIcon}>
+                <Icon name={icon} size={25} color={theme.colors.text} />
+              </View>
+            )}
 
             <TextInput
               ref={combinedRef}

@@ -1,37 +1,9 @@
 import React from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/elements';
 
-import { Icon, Text } from '../components';
+import { BasicListItem, Icon, Text } from '../components';
 import { useChangeNavigationBarColor, useTheme } from '../hooks';
-
-interface SettingsItemProps {
-  text: string;
-}
-
-const SettingsItem: React.FC<SettingsItemProps> = ({ text }) => {
-  const theme = useTheme();
-  return (
-    <Pressable
-      style={{
-        flexDirection: 'row',
-        width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        paddingVertical: 15,
-        borderBottomWidth: 1,
-        borderColor: `${theme.colors.text}50`,
-      }}
-      android_ripple={{
-        borderless: false,
-        color: theme.colors.text,
-      }}>
-      <Text>{text}</Text>
-      <Icon name="arrow-right-s-line" size={25} color={theme.colors.text} />
-    </Pressable>
-  );
-};
 
 const Settings: React.FC = () => {
   const theme = useTheme();
@@ -41,10 +13,10 @@ const Settings: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={{ paddingTop: headerHeight }}>
-      <SettingsItem text="Change Language" />
-      <SettingsItem text="Leave Feedback" />
-      <SettingsItem text="Terms of Service" />
-      <SettingsItem text="Privacy Policy" />
+      <BasicListItem text="Change Language" />
+      <BasicListItem text="Leave Feedback" />
+      <BasicListItem text="Terms of Service" />
+      <BasicListItem text="Privacy Policy" />
       <View
         style={{
           justifyContent: 'center',

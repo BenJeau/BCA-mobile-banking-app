@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Button, InfoImage } from '../components';
+import { Button, InfoImage, Text } from '../components';
 import { useChangeNavigationBarColor, useTheme } from '../hooks';
 import { useNavigation } from '@react-navigation/native';
 
-const Transfer: React.FC = () => {
+const Deposit: React.FC = () => {
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -23,12 +23,12 @@ const Transfer: React.FC = () => {
       <InfoImage
         source={
           theme.dark
-            ? require('../assets/images/transfer.png')
-            : require('../assets/images/light/transfer.png')
+            ? require('../assets/images/camera.png')
+            : require('../assets/images/light/camera.png')
         }
         maxHeight={250}
-        title="Transfer money"
-        description="Select a way to transfer money"
+        title="Deposit your cheques"
+        description="Simply take a picture of your cheque!"
       />
       <View
         style={{
@@ -36,20 +36,18 @@ const Transfer: React.FC = () => {
           marginTop: 40,
         }}>
         <Button
-          label="Transfer Between Accounts"
-          onPress={() => navigation.navigate('Transfer Between Accounts')}
+          label="Deposit Cheque"
+          icon="money-dollar-circle-fill"
+          onPress={() => navigation.navigate('Mobile Deposit')}
         />
-        <Button
-          label="E-Transfer"
-          style={{
-            marginTop: 10,
-          }}
-          type="secondary"
-          onPress={() => navigation.navigate('Overview')}
-        />
+        <Text
+          style={{ marginTop: 15, textAlign: 'center', paddingHorizontal: 5 }}>
+          By deposing this cheque via this mobile application, you agree to the
+          terms and conditions of this feature
+        </Text>
       </View>
     </View>
   );
 };
 
-export default Transfer;
+export default Deposit;

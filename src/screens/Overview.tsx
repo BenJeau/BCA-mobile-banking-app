@@ -1,7 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
 
-import { Text } from '../components';
+import { AccountSelection, Text } from '../components';
 import { useChangeNavigationBarColor, useTheme } from '../hooks';
 
 const Overview: React.FC = () => {
@@ -9,9 +8,12 @@ const Overview: React.FC = () => {
   useChangeNavigationBarColor(theme.colors.text, theme.dark);
 
   return (
-    <View>
-      <Text>Overview</Text>
-    </View>
+    <AccountSelection
+      navigationScreenDestination="Account Details"
+      headerComponent={
+        <Text style={{ paddingBottom: 10 }}>Welcome John Smith!</Text>
+      }
+    />
   );
 };
 

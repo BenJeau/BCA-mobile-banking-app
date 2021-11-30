@@ -4,16 +4,14 @@ import { TextProps, Text as RNText } from 'react-native';
 import { useTheme } from '../hooks';
 
 const Text: React.FC<TextProps> = props => {
-  const {
-    colors: { text },
-  } = useTheme();
+  const theme = useTheme();
 
   return (
     <RNText
       {...props}
       style={[
         {
-          color: text,
+          color: theme.colors.text,
           fontFamily: 'Poppins-Regular',
           marginBottom: -2,
         },
